@@ -87,4 +87,55 @@ def play_game():
         
         time_taken = end_time - start_time
         
-       
+        time_taken = end_time - start_time
+        
+        if user_answer == question.answer:
+            typewriter_effect("Correct! Well done!")
+            score += 1
+            streak += 1
+            if streak > max_streak:
+                max_streak = streak
+            
+            if time_taken < 5:
+                bonus = 2
+            elif time_taken < 10:
+                bonus = 1
+            else:
+                bonus = 0
+            
+            score += bonus
+            if bonus > 0:
+                typewriter_effect(f"Quick answer bonus: +{bonus} points!")
+        else:
+            typewriter_effect(f"Incorrect. The correct answer is: {question.answer}")
+            lives -= 1
+            streak = 0
+            if lives == 0:
+                typewriter_effect("Game Over! You've run out of lives.")
+                break
+        
+        typewriter_effect(f"Lives remaining: {lives}")
+        typewriter_effect(f"Current score: {score}")
+        typewriter_effect(f"Current streak: {streak}")
+        
+        if total_questions % 3 == 0:
+            typewriter_effect("\nBonus round! Answer correctly to gain an extra life.")
+            bonus_question = random.choice(questions)
+            typewriter_effect(f"Bonus Question: {bonus_question.question}")
+            bonus_answer = input("Your answer: ").lower()
+            if bonus_answer == bonus_question.answer:
+                typewriter_effect("Correct! You've earned an extra life!")
+                lives += 1
+            else:
+                typewriter_effect(f"Incorrect. The answer was: {bonus_question.answer}")
+        
+        time.sleep(1)
+    
+    typewriter_effect("\nGame Over!")
+    typewriter_effect(f"Final Score: {score}")
+    typewriter_effect(f"Questions Answered: {total_questions}")
+    typewriter_effect(f"Accuracy: {(score / total_questions) * 100:.2f}%")
+    typewriter_effect(f"Max Streak: {max_streak}")
+    
+    return score
+
