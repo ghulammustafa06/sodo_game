@@ -10,7 +10,14 @@ def typewriter_effect(text, delay=0.03):
     print()
 
 def display_title():
-    title = """Sodo Game  """
+    title = """
+    ███████╗ ██████╗ ██████╗  ██████╗     ██████╗  █████╗ ███╗   ███╗███████╗
+    ██╔════╝██╔═══██╗██╔══██╗██╔═══██╗    ██╔════╝ ██╔══██╗████╗ ████║██╔════╝
+    ███████╗██║   ██║██║  ██║██║   ██║    ██║  ███╗███████║██╔████╔██║█████╗  
+    ╚════██║██║   ██║██║  ██║██║   ██║    ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  
+    ███████║╚██████╔╝██████╔╝╚██████╔╝    ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗
+    ╚══════╝ ╚═════╝ ╚═════╝  ╚═════╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝
+    """
     print(title)
 
 class Question:
@@ -19,8 +26,7 @@ class Question:
         self.answer = answer
         self.difficulty = difficulty
 
-        
-        questions = [
+questions = [
             Question("What does CPU stand for?", "central processing unit", 1),
             Question("What does GPU stand for?", "graphics processing unit", 1),
             Question("What does RAM stand for?", "random access memory", 1),
@@ -51,7 +57,7 @@ class Question:
             Question("What does MVC stand for?", "model-view-controller", 3),
             Question("What does HTTP stand for?", "hypertext transfer protocol", 3),
             Question("What does URL stand for?", "uniform resource locator", 3),
-        ]
+]
 
 def play_game():
     score = 0
@@ -84,8 +90,6 @@ def play_game():
         start_time = time.time()
         user_answer = input("Your answer: ").lower()
         end_time = time.time()
-        
-        time_taken = end_time - start_time
         
         time_taken = end_time - start_time
         
@@ -139,3 +143,11 @@ def play_game():
     
     return score
 
+if __name__ == "__main__":
+    display_title()
+    while True:
+        play_game()
+        play_again = input("Do you want to play again? (yes/no): ").lower()
+        if play_again != "yes":
+            typewriter_effect("Thank you for playing SODO Game! Goodbye!")
+            break
